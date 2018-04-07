@@ -11,8 +11,6 @@ set(SOURCE
   ./source/MakeMessageTest.cpp
   ./source/P2PTests.cpp
   ./source/ScatterTest.cpp
-  ./source/shiva.vcxproj
-  ./source/shiva.vcxproj.filters
   ./source/StaticEnvironment.cpp
   ./source/StaticEnvironment.h
 )
@@ -36,11 +34,11 @@ include(../../conan.cmake)
 conan_cmake_run(BASIC_SETUP CMAKE_TARGETS CONAN_CMAKE_MULTI
   REQUIRES
     "boost/1.66.0@conan/stable"
+    "msmpi/2008.2@tuncb/pangea"
 )
 
 add_library(shiva_tester SHARED ${SOURCE} ${SHIVA_LIBRARY})
 target_include_directories(shiva_tester PRIVATE "../shiva/include/")
-target_link_libraries(shiva_tester msmpi.lib)
 conan_target_link_libraries(shiva_tester)
 
 source_group("shiva_library" FILES ${SHIVA_LIBRARY})

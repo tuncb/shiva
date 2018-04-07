@@ -59,7 +59,7 @@ BOOST_AUTO_TEST_CASE(Scatterv)
 		}
 		shiva::scatterv(0, comm, shiva::make_message(send_data), dist, shiva::make_message(recv_data) );
 	} else {
-		shiva::scatterv(0, comm, shiva::make_message(recv_data.data(), local_size) );
+		shiva::scatterv(0, comm, dist, shiva::make_message(recv_data.data(), local_size) );
 	}
 
 	const int local_disp = std::get<1>(dist)[mpi_rank];

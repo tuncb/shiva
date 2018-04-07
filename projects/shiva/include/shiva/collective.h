@@ -81,11 +81,11 @@ inline void scatterv(int root, const shiva::communicator& comm, const shiva::mes
 		send_msg.datatype, recv_msg.data, recv_msg.size, recv_msg.datatype, root, comm.mpi_communicator() )); 
 }
 
-template <typename T>
-inline void scatterv(int root, const shiva::communicator& comm, const shiva::message<T>& recv_msg)
+template <typename T, typename V1, typename V2>
+inline void scatterv(int root, const shiva::communicator& comm, const std::tuple<V1, V2>& distribution, const shiva::message<T>& recv_msg)
 {
-	call_mpi( MPI_Scatterv(nullptr, nullptr, nullptr,
-		MPI_DATATYPE_NULL, recv_msg.data, recv_msg.size, recv_msg.datatype, root, comm.mpi_communicator() )); 
+  call_mpi(MPI_Scatterv(nullptr, const_cast<int*>(&(std::get<0>(distribution)[0])), const_cast<int*>(&(std::get<1>(distribution)[0])),
+    MPI_DATATYPE_NULL, recv_msg.data, recv_msg.size, recv_msg.datatype, root, comm.mpi_communicator()));
 }
 
 template <typename OpType, typename T1, typename T2>
