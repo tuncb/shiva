@@ -7,7 +7,7 @@
 #pragma once
 
 #include <mpi.h>
-
+#include <vector>
 #include <array>
 
 namespace shiva {
